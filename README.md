@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A brief description of the application here. Dies Irae Requim. Moris Tu Be Requim.
+A brief description of the application here. "Dies Irae Requim. Moris Tu Be Requim" - Monty Python
 
 
 > [!NOTE]
