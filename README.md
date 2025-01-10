@@ -35,7 +35,8 @@ Here is how people would interact with the website.
 sequenceDiagram
     actor User
     actor Website
-    You->>Website: Replace this with your design
+    User->>Website:
+
 ```
 
 ### Key features
