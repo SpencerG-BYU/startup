@@ -22,7 +22,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-How many times have you argued with your friends over simple controversial subjects, such as whether water is wet, cereal is a soup, or what utensil you eat macaroni and cheese with? This website can finally settle some of the most controversial debates through a simple voting system. Whichever choice receives the most votes determines what option is truly correct.
+How many times have you argued with your friends over simple controversial subjects, such as whether water is wet, cereal is a soup, or what utensil you eat macaroni and cheese with? This website can finally settle some of the most controversial debates through a simple voting system. Whichever choice receives the most votes determines what option is truly correct. The website even lets you see how popular each option is among other people, and will notify you when a winner has changed.
 
 ### Design
 
@@ -56,12 +56,13 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses two pages, one fpr voting and one for displaying the results.
+- **CSS** - Text for options is centered under each image, looks nice, and is easy to read. Easy to determine which option is winning on results page.
+- **React** - Redirects user to results page when votes are submittied via a button press.
+- **Service** - Uses authentication API to verify user is logged in and hasn't already voted
+- **DB/Login** - Displays the amount of votes made for each option o nthe results page.
+- **WebSocket** - Notifies user if a new option receives more votes than current winner.
+
 
 ## 🚀 AWS deliverable
 
