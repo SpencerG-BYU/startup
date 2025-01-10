@@ -35,7 +35,7 @@ Here is how people would interact with the website.
 sequenceDiagram
     actor User
     actor Website
-    User->>Website:
+    User->>Website: Replace this
 
 ```
 
