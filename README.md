@@ -29,7 +29,7 @@ How many times have you argued with your friends over simple controversial subje
 ![Design image1](IMG_6153.jpg)
 ![Design image2](IMG_6152.jpg)
 
-Here is how people would interact with the website.
+Here is how people would interact with the website. In this case, User1 tipped the scale of votes and now the option 'Fork' is winning.
 
 ```mermaid
 sequenceDiagram
@@ -37,9 +37,9 @@ sequenceDiagram
     actor User2
     actor User3
     actor Website
-    User1->>Website: Vote
+    User1->>Website: Voted for Fork
     Website->>User2: Fork is Winning
-    Website->>User3: Fork A is Winning
+    Website->>User3: Fork is Winning
 
 
 
