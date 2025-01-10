@@ -30,7 +30,8 @@ How many times have you argued with your friends over simple controversial subje
 
 ### Design
 
-![Design image](file:///C:/Users/spenc/Downloads/2025-01-09%2017-13.pdf)
+![Design image1](IMG_6153.jpg)
+![Design image2](IMG_6152.jpg)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
