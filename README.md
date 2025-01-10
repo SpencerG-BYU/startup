@@ -31,11 +31,17 @@ How many times have you argued with your friends over simple controversial subje
 
 Here is how people would interact with the website.
 
-```
+```mermaid
 sequenceDiagram
-    actor User
+    actor User1
+    actor User2
+    actor User3
     actor Website
-    User->>Website: Replace this
+    User1->>Website: Vote
+    Website->>User2: Fork is Winning
+    Website->>User3: Fork A is Winning
+
+
 
 ```
 
