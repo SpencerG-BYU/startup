@@ -63,7 +63,6 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Displays the amount of votes made for each option o nthe results page.
 - **WebSocket** - Notifies user if a new option receives more votes than current winner.
 
-
 ## 🚀 AWS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
