@@ -14,9 +14,9 @@ A brief description of the application here.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
+- [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] Description of key features
 - [ ] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -40,16 +40,17 @@ sequenceDiagram
     User1->>Website: Voted for Fork
     Website->>User2: Fork is Winning
     Website->>User3: Fork is Winning
-
-
-
 ```
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Prevents votes until signed in
+- Shows total vote count for each option after submitting votes
+- Displays images for each option
+- Only allows one vote per user
+- Votes stay permantly 
+- Displays winning option when winner changes
+- Highlights winning option after submitting votes
 
 ### Technologies
 
