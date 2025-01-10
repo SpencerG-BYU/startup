@@ -1,4 +1,4 @@
-# The Controversy is Over
+# Controversy Solver
 
 [My Notes](notes.md)
 
