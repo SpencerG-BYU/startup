@@ -31,9 +31,9 @@ How many times have you argued with your friends over simple controversial subje
 
 Here is how people would interact with the website.
 
-```mermaid
+```
 sequenceDiagram
-    actor You
+    actor User
     actor Website
     You->>Website: Replace this with your design
 ```
