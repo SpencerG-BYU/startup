@@ -73,15 +73,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - there are 3 HTML pages: One for the Login, one for Voting, and one for viewing the Results.
+- [x] **Proper HTML element usage** - Each page has a Header and Footer.
+- [x] **Links** - The login buttons and the temporary navigation section links to the other pages.
+- [x] **Text** - There is text for each of the options and titles of questions.
+- [x] **3rd party API placeholder** - The Login buttons will eventually link to a 3rd party API which will verify the user via a one-time-password.
+- [x] **Images** - Each question has an image representing the controversy below it.
+- [x] **Login placeholder** - The Login has a place to enter a user's netID and password.
+- [x] **DB data placeholder** - The Results page has the placeholder for the votes for each option.
+- [x] **WebSocket placeholder** - The Results page has the placeholder for updating the user when there is an upset/tie in votes.
 
 ## 🚀 CSS deliverable
 
