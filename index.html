@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startup Page</title>
+    <title>Solver Login</title>
 </head>
 <body>
-    <h1>Welcome to Our Startup</h1>
-    <p>This is a basic HTML page for our startup.</p>
+    <header>
+        <h1>Controvery Solver</h1>
+    </header>
+
+    <main>
+        <h2>Create an Account</h2>
+        <p>Will Redirect to 3rd Party API GoOPT for Verification</p>
+        <form method="get" action="results.html">
+            <ul>
+                <label for="text">NetID</label>
+                <input type="text" placeholder="NetID" required />
+            </ul>
+            <ul>
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" requied />
+            </ul>
+            <button type="submit">Create</button>
+         </form>
+
+      <h2>Login</h2>
+      <p>Will Redirect to 3rd Party API GoOPT for Verification</p>
+        <form method="get" action="vote.html">
+            <ul>
+                <label for="text">NetID</label>
+                <input type="text" placeholder="NetID" requied />
+            </ul>
+            <ul>
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" requied />
+            </ul>
+            <button type="submit">Login</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>Spencer Glade</p>
+        <a href="https://github.com/SpencerG-BYU/startup">GitHub</a>
+    </footer>
 </body>
 </html>
