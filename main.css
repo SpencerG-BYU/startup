@@ -1,53 +1,112 @@
+header {
+  background-color: darkcyan;
+  color: #fff;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: black;
+}
+
 body {
-    display: flex;
-    flex-direction: column;
-    min-width: 375px;
-    background-color:darkcyan;
-}
-  
-  header {
-    flex: 0 80px;
+  font-family: 'Arial';
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: coral;
 }
 
-  form {
-    display: flex;
-    flex-direction: column;
+main {
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  background: lightgray;
+  border-radius: 8px;
 }
 
-  h1 {
-    text-align: center;
-    font: bold 5em serif;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
-}
-  
-  h2 {
-    text-align: center;
-    font: bold 3em serif;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
+main h2 {
+  color: darkcyan;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
+main ul.updates {
+  color: green;
+}
+
+main h3 {
+  margin-top: 20px;
+}
+
+main ul {
+  list-style-type: none;
+}
+
+main ul p {
+  background: #e9ecef;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background:darkcyan;
+  color: #fff;
+  margin-top: 20px;
+}
+
+footer a {
+  color: black;
+}
+
+@media (max-width: 850px) {
   main {
-    flex: 1 calc(100vh - 110px);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+      max-width: 90%;
+      padding: 15px;
+  }
 }
+
+@media (max-width: 600px) {
+  header h1 {
+      font-size: 1.5rem;
+  }
   
-  footer {
-    flex: 0 50px;
-}
+  nav ul {
+      flex-direction: column;
+      align-items: center;
+  }
   
-  @media (max-height: 600px) {
-    header {
-      display: none;
-    }
-    footer {
-      display: none;
-    }
-    main {
-      flex: 1 100vh;
-    }
+  main ul p {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
 }
