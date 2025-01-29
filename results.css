@@ -24,18 +24,16 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: center;
-    margin: 10px 0 0;
 }
 
 nav ul li {
-    margin: 0 10px;
+    margin: 10px;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
 }
 
 nav ul li a:hover {
@@ -48,7 +46,6 @@ main {
     margin: 20px auto;
     background: lightgray;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 main h2 {
@@ -57,30 +54,25 @@ main h2 {
     margin-bottom: 20px;
 }
 
+main ul.updates {
+    color: green;
+}
+
 main h3 {
-    color: #444;
     margin-top: 20px;
 }
 
 main ul {
     list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
 }
 
 main ul p {
     background: #e9ecef;
-    margin: 5px 0;
+    margin: 5px;
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;
     display: flex;
-    justify-content: space-between;
-}
-
-main ul.updates {
-    color: green;
-    font: Arial;
 }
 
 footer {
@@ -93,9 +85,6 @@ footer {
 
 footer a {
     color: black;
-    text-decoration: none;
-    font-weight: bold;
-    text-decoration: underline;
 }
 
 @media (max-width: 850px) {
