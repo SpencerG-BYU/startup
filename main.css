@@ -54,8 +54,25 @@ main h2 {
   margin-bottom: 20px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-weight: bold;
+  color: #333;
+}
+
+form input {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 button {
-  width: 50%;
+  width: 100%;
   padding: 5px;
   background-color: darkcyan;
   color: white;
