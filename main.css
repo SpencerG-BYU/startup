@@ -54,26 +54,21 @@ main h2 {
   margin-bottom: 20px;
 }
 
-main ul.updates {
-  color: green;
-}
-
-main h3 {
-  margin-top: 20px;
-}
-
-main ul {
-  list-style-type: none;
-}
-
-main ul p {
-  background: #e9ecef;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 5px;
+button {
+  width: 50%;
+  padding: 5px;
+  background-color: darkcyan;
+  color: white;
+  font-size: 1.0rem;
   font-weight: bold;
-  display: flex;
+  border-radius: 5px;
+  margin-bottom: 25px;
 }
+
+button:hover {
+  background-color: black;
+}
+
 
 footer {
   text-align: center;
