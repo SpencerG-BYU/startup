@@ -2,27 +2,43 @@ body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
-  }
+    background-color:darkcyan;
+}
   
   header {
     flex: 0 80px;
-  }
+}
+
+  form {
+    display: flex;
+    flex-direction: column;
+}
+
+  h1 {
+    text-align: center;
+    font: bold 5em serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
   
+  h2 {
+    text-align: center;
+    font: bold 3em serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
   main {
     flex: 1 calc(100vh - 110px);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-  }
+}
   
   footer {
     flex: 0 50px;
-  }
-  
-  footer a {
-    float: right;
-  }
+}
   
   @media (max-height: 600px) {
     header {
@@ -34,4 +50,4 @@ body {
     main {
       flex: 1 100vh;
     }
-  }
+}
