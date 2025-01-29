@@ -49,20 +49,16 @@ main {
 }
 
 label {
-    text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.25em;
 }
 
 label.q {
     font: bold 1.5rem Arial;
     display: block;
     margin-bottom: 10px;
+    margin-top: 50px;
     text-align: left;
-    margin-left: 10px;
-}
-
-ul li {
-    margin-bottom: 15px;
+    margin-left: 30px;
 }
 
 img {
@@ -71,8 +67,7 @@ img {
     border: thin black solid;
     border-radius: 8px;
     max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 ul.radio {
@@ -82,14 +77,13 @@ ul.radio {
 }
 
 button {
-    display: block;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     margin-top: 20px;
     background-color: darkcyan;
     color: white;
-    border: none;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
+    font-weight: bold;
     border-radius: 5px;
 }
 
