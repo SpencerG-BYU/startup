@@ -58,12 +58,35 @@ label {
 
 label.q {
     font: bold 1.5rem Arial;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-left: 10px;
 }
 
 img {
     display: block;
     margin: 0 auto;
     border: thin black solid;
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: darkcyan;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: black;
 }
 
 footer {
@@ -86,6 +109,10 @@ footer a {
         max-width: 90%;
         padding: 15px;
     }
+
+    button {
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 600px) {
@@ -96,5 +123,9 @@ footer a {
     nav ul {
         flex-direction: column;
         align-items: center;
+    }
+
+    button {
+        font-size: 1rem;
     }
 }
