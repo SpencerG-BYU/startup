@@ -14,9 +14,9 @@ export default function App() {
         <h1>Controversy Solver</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Login</a></li>
-                <li><a href="vote.html">Vote</a></li>
-                <li><a href="results.html">Results</a></li>
+                <NavLink className='nav-link' to=''>Login</NavLink>
+                <NavLink className='nav-link' to='vote'>Vote</NavLink>
+                <NavLink className='nav-link' to='results'>Results</NavLink>
             </ul>
         </nav>
         </header>
