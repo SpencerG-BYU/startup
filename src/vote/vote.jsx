@@ -1,5 +1,7 @@
 import React from 'react';
 import './vote.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 export function Vote() {
   return (
