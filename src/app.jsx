@@ -21,6 +21,13 @@ export default function App() {
         </nav>
         </header>
 
+        <Routes>
+            <Route path='/' element={<Login />} exact />
+            <Route path='/vote' element={<Vote />} />
+            <Route path='/results' element={<Results />} />
+            <Route path='*' element={<NotFound />} />
+        </Routes>
+
         <footer>
             <p>Spencer Glade</p>
             <a href="https://github.com/SpencerG-BYU/startup">GitHub</a>
@@ -29,3 +36,7 @@ export default function App() {
     </BrowserRouter>
     );
 }
+
+function NotFound() {
+    return <main>404: Return to sender. Address unknown.</main>;
+  }
