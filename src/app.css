@@ -31,7 +31,7 @@ header {
     color: black;
   }
   
-  body {
+  .body {
     font-family: 'Arial';
     line-height: 1.6;
     margin: 0;
