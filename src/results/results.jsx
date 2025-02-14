@@ -2,6 +2,21 @@ import React from 'react';
 import './results.css';
 
 export function Results() {
+    const [results, setResults] = React.useState([]);
+
+    React.useEffect(() => {
+        const storedResults = localStorage.getItem('results');
+        if (storedResults) {
+            setResults(JSON.parse(storedResults));
+        }
+    }
+    , []);
+
+    React.useEffect(() => {
+      localStorage.setItem('results', JSON.stringify(results));
+    }, [results]);
+    
+
   return (
     <main>
         <h2>Results</h2>
@@ -9,7 +24,6 @@ export function Results() {
                 <li>"Wet" from "Is Water Wet?" Is Winning!</li>
                 <li>"Does Pineapple Go on Pizza?" Is Tied!</li>
                 <li>"Gif" from "Is it Pronounced "Gif" or "Jif"?" Is Winning!</li>
-                
             </ul>
 
 

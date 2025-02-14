@@ -56,7 +56,7 @@ export function Vote() {
                 <label for="waffle">Waffles</label>
             </ul>
 
-            <form method="get" action="results.html">
+            <form method="get" action="/results">
                 <button type="submit">Submit Votes</button>
             </form>
     </main>
