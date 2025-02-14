@@ -2,6 +2,19 @@ import React from 'react';
 import './login.css';
 
 export function Login() {
+  const [userName, setUserName] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  async function loginUser() {
+    localStorage.setItem('userName', userName);
+    props.onLogin(userName);
+  }
+
+  async function createUser() {
+    localStorage.setItem('userName', userName);
+    props.onLogin(userName);
+  }
+
   return (
     <main>
       <div>
