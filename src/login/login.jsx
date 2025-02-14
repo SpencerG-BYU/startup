@@ -23,11 +23,11 @@ export function Login() {
         <form method="get" action="/vote">
             <ul>
                 <label for="NetID">NetID</label>
-                <input type="text" placeholder="NetID" required />
+                <input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="NetID" required />
             </ul>
             <ul>
                 <label for="password">Password</label>
-                <input type="text" placeholder="Password" required />
+                <input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="Password" required />
             </ul>
             <button type="submit">Create</button>
         </form>
