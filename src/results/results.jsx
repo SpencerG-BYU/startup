@@ -3,6 +3,7 @@ import './results.css';
 
 export function Results() {
     const [results, setResults] = React.useState([]);
+    
 
     React.useEffect(() => {
         const storedResults = localStorage.getItem('results');
@@ -15,6 +16,10 @@ export function Results() {
     React.useEffect(() => {
       localStorage.setItem('results', JSON.stringify(results));
     }, [results]);  
+
+    //WebSocket updates - HELP
+    setInterval(() => {
+    }, 1000);
 
   return (
     <main>
@@ -54,6 +59,11 @@ export function Results() {
             <p>Pancakes: 7</p>
             <p>Waffles: 3</p>
         </ul>
+
+        <form method="get" action="/vote">
+                <button type="submit">Re-Vote</button>
+        </form>
+
     </main>
   );
 }
