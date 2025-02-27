@@ -5,7 +5,7 @@ import './login.css';
 export function Login({setUser}) {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
-const navigate = useNavigate();
+  const navigate = useNavigate();
   
   function createUser(){
     localStorage.setItem('username', username);
@@ -33,9 +33,9 @@ const navigate = useNavigate();
 
   return (
     <main>
-      <div>
         <h2>Create an Account</h2>
-        <p>Note: Will Redirect to 3rd Party API GoOPT for Verification instead of Vote</p>
+        <p>Note: Will Eventually Redirect to 3rd Party API for Verification instead of Vote</p>
+        <div>
             <ul>
                 <label for="Username">Username</label>
                 <input type="text" onChange={userChange} placeholder="Username" required />
@@ -55,8 +55,8 @@ const navigate = useNavigate();
               <label for="password">Password</label>
               <input type="text" onChange={passwordChange} placeholder="Password" required />
           </ul>
-            <button type="submit" onClick={loginUser}>Login</button>        
-      </div>
+            <button type="submit" onClick={loginUser}>Login</button>
+        </div>        
     </main>
   );
 }
