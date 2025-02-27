@@ -3,14 +3,14 @@ main ul.updates {
 }
 
 main h3 {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 main ul {
     list-style-type: none;
 }
 
-main ul p {
+main ul li {
     background: #e9ecef;
     margin: 5px;
     padding: 10px;
