@@ -48,11 +48,12 @@ export function Vote() {
         <h2>Select Your Choice</h2>
         <form onSubmit={handleSubmit}>
         {questions.map((question, index) => (
-            <ul className="radio">
-                <label className="q" for="text">{question.question}</label>
+            <ul className="radio" key={index}>
+                <label className="question" for="text">{question.question}</label>
                 <div> <img src={question.image} alt={question.question} width="500" /></div>
-                {question.options.map((option, index) => (
-                    <React.Fragment key={index}>
+                <li>
+                  {question.options.map((option, index) => (
+                    <div key={index}>
                         <input 
                             type="radio" 
                             name={question.question} 
@@ -61,9 +62,10 @@ export function Vote() {
                             onChange={() => handleVoteChange(question.question, option)}
                             required
                         />
-                        <label for={option}>{option}</label>
-                    </React.Fragment>
+                        <label className="option" for={option}>{option}</label>
+                    </div>
                 ))}
+                </li>
             </ul>
         ))}
         <button type="submit">Submit Votes</button>

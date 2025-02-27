@@ -1,21 +1,23 @@
-label {
-    font-size: 1.25em;
-    margin-right: 30px;
-    margin-left: 10px;
+main {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-label.q {
+label {
+    text-align: center;
+    font-size: 1.25em;
+}
+
+label.question {
     font: bold 2rem Arial;
     display: block;
     margin-bottom: 10px;
     margin-top: 50px;
-    margin-left: 0;
-    margin-right: 0;
     text-align: center;
 }
 
 img {
-    display: block;
     margin: 0 auto;
     border: thin black solid;
     border-radius: 8px;
@@ -27,6 +29,35 @@ ul.radio {
     list-style: none;
     padding: 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+ul.radio > li {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+ul.radio > li > div {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+ul.radio > li > div > label {
+    margin-left: 10px;
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+ul.radio > li > div > input[type="radio"] {
+    width: 25px;
+    height: 25px; 
+    margin-right: 10px;
 }
 
 button {
@@ -43,7 +74,6 @@ button {
 button:hover {
     background-color: black;
 }
-
 
 @media (max-width: 850px) {
     button {
