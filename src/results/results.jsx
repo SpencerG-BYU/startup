@@ -4,6 +4,7 @@ import './results.css';
 
 export function Results() {
     const [results, setResults] = React.useState({});
+    const navigate = React.useNavigate();
     const questions = [
         {question: "What Utensil Do You Use With Mac N Cheese?", options: ["Fork", "Spoon"], image: "macncheese.png"},
         {question: "Is Water Wet?", options: ["Wet", "Not Wet"], image: "water.png"},
@@ -39,6 +40,7 @@ export function Results() {
                     </ul>
                 </div>
             ))}
+            <button onClick={() => navigate('/vote')}>Re-Vote</button>
         </main>
     );
 }

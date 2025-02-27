@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './vote.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +13,7 @@ export function Vote() {
     ];
 
     const [votes, setVotes] = React.useState({});
-    const navigate = useNavigate();
+    const navigate = React.useNavigate();
 
     React.useEffect(() => {
         const savedVotes = JSON.parse(localStorage.getItem('votes'));
