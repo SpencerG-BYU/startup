@@ -19,17 +19,13 @@ export function Results() {
             <div key={index}>
                 <h3>{question}</h3>
                 <ul>
-                    {Object.entries(results[question]).map(([option, count], index) => (
-                        <li key={index}>{option}: {count}</li>
-                    ))}
+                    <li>{results[question]}</li>
                 </ul>
             </div>
         ))}
-
         <form method="get" action="/vote">
-                <button type="submit">Re-Vote</button>
+            <button type="submit">Re-Vote</button>
         </form>
-
     </main>
   );
 }

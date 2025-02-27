@@ -38,6 +38,7 @@ export function Vote() {
             alert('Please answer all questions before submitting');
             return;
         } else {
+            localStorage.setItem('results', JSON.stringify(votes));
             navigate('/results');
         }
     };
@@ -45,6 +46,7 @@ export function Vote() {
   return (
     <main>
         <h2>Select Your Choice</h2>
+        <form onSubmit={handleSubmit}>
         {questions.map((question, index) => (
             <ul className="radio">
                 <label className="q" for="text">{question.question}</label>
@@ -64,8 +66,7 @@ export function Vote() {
                 ))}
             </ul>
         ))}
-        <form method="get" action="/results" onSubmit={handleSubmit}>
-            <button type="submit">Submit Votes</button>
+        <button type="submit">Submit Votes</button>
         </form>
     </main>
   );
