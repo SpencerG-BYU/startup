@@ -40,6 +40,7 @@ ul.radio > li {
     margin: 10px 0;
     display: flex;
     justify-content: center;
+    background: lightgray;
 }
 
 ul.radio > li > div {
