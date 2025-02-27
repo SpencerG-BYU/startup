@@ -30,7 +30,7 @@ export default function App() {
         </header>
 
         <Routes>
-            <Route path='/' element={<Login />} exact />
+            <Route path='/' element={<Login setUser={setUser} />} exact />
             <Route path='/vote' element={<Vote />} />
             <Route path='/results' element={<Results />} />
             <Route path='*' element={<NotFound />} />

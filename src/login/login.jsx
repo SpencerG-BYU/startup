@@ -1,7 +1,7 @@
 import React from 'react';
 import './login.css';
 
-export function Login() {
+export function Login({setUser}) {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   
@@ -9,8 +9,7 @@ export function Login() {
   function loginUser(){
     localStorage.setItem('username', user);
     localStorage.setItem('password', password);
-
-
+    setUser(user);
   }
 
   function textChange(e){
