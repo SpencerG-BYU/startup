@@ -1,7 +1,6 @@
 import React from 'react';
 import './vote.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 
 export function Vote() {
     const questions = [
@@ -13,6 +12,34 @@ export function Vote() {
         {question: "Are Panckaes or Waffles Better?", options: ["Pancakes", "Waffles"], image: "breakfast.png"}
     ];
 
+    const [votes, setVotes] = React.useState({});
+
+    React.useEffect(() => {
+        const savedVotes = JSON.parse(localStorage.getItem('votes'));
+        if (savedVotes) {
+            setVotes(savedVotes);
+        }
+    }, []);
+
+    const handleVoteChange = (question, option) => {
+        setVotes(prevVotes => {
+            const newVotes = {...prevVotes, [question]: option};
+            localStorage.setItem('votes', JSON.stringify(newVotes));
+            return newVotes;
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const allAnswered = questions.every(question => votes[question.question]);
+        if (!allAnswered) {
+            alert('Please answer all questions before submitting');
+            return;
+        } else {
+            Navigate('/results');
+        }
+    };
+
   return (
     <main>
         <h2>Select Your Choice</h2>
@@ -21,11 +48,21 @@ export function Vote() {
                 <label className="q" for="text">{question.question}</label>
                 <div> <img src={question.image} alt={question.question} width="500" /></div>
                 {question.options.map((option, index) => (
-                    <><input type="radio" name={question.question} value={option} required /><label for={option}>{option}</label></>
+                    <React.Fragment key={index}>
+                        <input 
+                            type="radio" 
+                            name={question.question} 
+                            value={option}
+                            checked={votes[question.question] == option}
+                            onChange={() => handleVoteChange(question.question, option)}
+                            required
+                        />
+                        <label for={option}>{option}</label>
+                    </React.Fragment>
                 ))}
             </ul>
         ))}
-        <form method="get" action="/results">
+        <form method="get" action="/results" onSubmit={handleSubmit}>
             <button type="submit">Submit Votes</button>
         </form>
     </main>
