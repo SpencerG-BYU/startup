@@ -7,6 +7,8 @@ import { Results } from './results/results';
 import { Vote } from './vote/vote';
 
 export default function App() {
+    const [user, setUser] = React.useState(localStorage.getItem('username') || null);
+    
     return (
     <BrowserRouter>
     <div>
