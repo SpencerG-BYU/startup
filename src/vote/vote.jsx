@@ -46,6 +46,7 @@ export function Vote() {
   return (
     <main>
         <h2>Select Your Choice</h2>
+        <h3>You Must Choose One Answer For Every Question Before Submitting</h3>
         <form onSubmit={handleSubmit}>
         {questions.map((question, index) => (
             <ul className="radio" key={index}>

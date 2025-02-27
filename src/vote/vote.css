@@ -4,6 +4,12 @@ main {
     margin: 0 auto;
 }
 
+h3 {
+    color: darkcyan;
+    text-align: center;
+    font-weight: bold;
+  }
+
 label {
     text-align: center;
     font-size: 1.25em;

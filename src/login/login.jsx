@@ -38,22 +38,22 @@ export function Login({setUser}) {
         <div>
             <ul>
                 <label for="Username">Username</label>
-                <input type="text" onChange={userChange} placeholder="Username" required />
+                <input type="text" onChange={userChange} placeholder="Username" />
             </ul>
             <ul>
                 <label for="password">Password</label>
-                <input type="text" onChange={passwordChange} placeholder="Password" required />
+                <input type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
             <button type="submit" onClick={createUser}>Create</button>
 
         <h2>Login</h2>
           <ul>
               <label for="Username">Username</label>
-              <input type="text" onChange={userChange} placeholder="Username" required />
+              <input type="text" onChange={userChange} placeholder="Username" />
           </ul>
           <ul>
               <label for="password">Password</label>
-              <input type="text" onChange={passwordChange} placeholder="Password" required />
+              <input type="text" onChange={passwordChange} placeholder="Password" />
           </ul>
             <button type="submit" onClick={loginUser}>Login</button>
         </div>        
