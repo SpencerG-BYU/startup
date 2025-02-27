@@ -27,6 +27,7 @@ export default function App() {
                 </li>
             </ul>
         </nav>
+        <ul>{user}</ul>
         </header>
 
         <Routes>

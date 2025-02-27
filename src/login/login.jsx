@@ -5,7 +5,6 @@ export function Login({setUser}) {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   
-
   function loginUser(){
     localStorage.setItem('username', user);
     localStorage.setItem('password', password);
