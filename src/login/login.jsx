@@ -15,7 +15,7 @@ export function Login({setUser}) {
   }
 
   function loginUser(){
-    if (localStorage.getItem('username') === user && localStorage.getItem('password') === password){
+    if (localStorage.getItem('username') === username && localStorage.getItem('password') === password){
       setUser(username);
       navigate('/results');
     } else {
@@ -37,25 +37,25 @@ export function Login({setUser}) {
         <p>Note: Will Eventually Redirect to 3rd Party API for Verification instead of Vote</p>
         <div>
             <ul>
-                <label for="Username">Username</label>
+                <label htmlFor="Username">Username</label>
                 <input type="text" onChange={userChange} placeholder="Username" />
             </ul>
             <ul>
-                <label for="password">Password</label>
+                <label ntmlFor="password">Password</label>
                 <input type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
-            <button type="submit" onClick={createUser}>Create</button>
+            <button onClick={createUser}>Create</button>
 
         <h2>Login</h2>
           <ul>
-              <label for="Username">Username</label>
+              <label htmlFor="Username">Username</label>
               <input type="text" onChange={userChange} placeholder="Username" />
           </ul>
           <ul>
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input type="text" onChange={passwordChange} placeholder="Password" />
           </ul>
-            <button type="submit" onClick={loginUser}>Login</button>
+            <button onClick={loginUser}>Login</button>
         </div>        
     </main>
   );

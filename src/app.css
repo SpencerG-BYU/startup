@@ -5,6 +5,11 @@ header {
     text-align: center;
     margin-bottom: 20px;
   }
+
+  header p {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
   
   h1 {
     font-size: 3rem;
