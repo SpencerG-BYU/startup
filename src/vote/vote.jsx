@@ -58,7 +58,6 @@ export function Vote() {
                             type="radio" 
                             name={question.question} 
                             value={option}
-                            checked={votes[question.question] == option}
                             onChange={() => handleVoteChange(question.question, option)}
                             required
                         />
