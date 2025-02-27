@@ -2,28 +2,32 @@ import React from 'react';
 import './login.css';
 
 export function Login({setUser}) {
-  const [user, setUser] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = React.useNavigate();
   
   function createUser(){
-    localStorage.setItem('username', user);
+    localStorage.setItem('username', username);
     localStorage.setItem('password', password);
-    setUser(user);
+    setUser(username);
     navigate('/vote');
   }
 
   function loginUser(){
     if (localStorage.getItem('username') === user && localStorage.getItem('password') === password){
-      setUser(user);
+      setUser(username);
       navigate('/results');
     } else {
       alert('Invalid username or password');
     }
   }
 
-  function textChange(e){
-    setText(e.target.value);
+  function userChange(e){
+    setUsername(e.target.value);
+  }
+
+  function passwordChange(e){
+    setPassword(e.target.value);
   }
 
   return (
@@ -33,27 +37,24 @@ export function Login({setUser}) {
         <p>Note: Will Redirect to 3rd Party API GoOPT for Verification instead of Vote</p>
             <ul>
                 <label for="Username">Username</label>
-                <input type="text" onChange={textChange} placeholder="Username" required />
+                <input type="text" onChange={userChange} placeholder="Username" required />
             </ul>
             <ul>
                 <label for="password">Password</label>
-                <input type="text" onChange={textChange} placeholder="Password" required />
+                <input type="text" onChange={passwordChange} placeholder="Password" required />
             </ul>
             <button type="submit" onClick={createUser}>Create</button>
 
         <h2>Login</h2>
           <ul>
               <label for="Username">Username</label>
-              <input type="text" onChange={textChange} placeholder="Username" required />
+              <input type="text" onChange={userChange} placeholder="Username" required />
           </ul>
           <ul>
               <label for="password">Password</label>
-              <input type="text" onChange={textChange} placeholder="Password" required />
+              <input type="text" onChange={passwordChange} placeholder="Password" required />
           </ul>
-            <button type="submit" onClick={loginUser}>Login</button>
-          
-      
-
+            <button type="submit" onClick={loginUser}>Login</button>        
       </div>
     </main>
   );
