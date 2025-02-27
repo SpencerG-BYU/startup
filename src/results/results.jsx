@@ -10,55 +10,21 @@ export function Results() {
         if (storedResults) {
             setResults(JSON.parse(storedResults));
         }
-    }
-    , []);
-
-    React.useEffect(() => {
-      localStorage.setItem('results', JSON.stringify(results));
-    }, [results]);  
-
-    //WebSocket updates - HELP
-    setInterval(() => {
-    }, 1000);
+    }, []);
 
   return (
     <main>
         <h2>Results</h2>
-        <h3>What Utensil Do You Eat Macaroni and Cheese With?</h3>
-        <ul>
-            <p>Fork: 8</p>
-            <p>Spoon: 2</p>
-        </ul>
-
-        <h3>Is Water Wet?</h3>
-        <ul>
-            <p>Wet: 6</p>
-            <p>Not Wet: 4</p>
-        </ul>
-
-        <h3>Is Cereal A Soup?</h3>
-        <ul>
-            <p>Soup: 3</p>
-            <p>Not Soup: 7</p>
-        </ul>
-
-        <h3>Does Pineapple Go on Pizza?</h3>
-        <ul>
-            <p>Heck Yes: 5</p>
-            <p>Absolutely Not: 5</p>
-        </ul>
-
-        <h3>Is Gif pronounced "Gif" or "Jif" ?</h3>
-        <ul>
-            <p>Gif: 6</p>
-            <p>Jif: 4</p>
-        </ul>
-
-        <h3>Are Panckaes or Waffles Better?</h3>
-        <ul>
-            <p>Pancakes: 7</p>
-            <p>Waffles: 3</p>
-        </ul>
+        {Object.keys(results).map((question, index) => (
+            <div key={index}>
+                <h3>{question}</h3>
+                <ul>
+                    {Object.entries(results[question]).map(([option, count], index) => (
+                        <li key={index}>{option}: {count}</li>
+                    ))}
+                </ul>
+            </div>
+        ))}
 
         <form method="get" action="/vote">
                 <button type="submit">Re-Vote</button>
