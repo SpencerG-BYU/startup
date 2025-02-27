@@ -2,47 +2,41 @@ import React from 'react';
 import './login.css';
 
 export function Login() {
-  const [userName, setUserName] = React.useState('');
+  const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
+  
 
-  async function loginUser() {
-    localStorage.setItem('userName', userName);
-    props.onLogin(userName);
+  function loginUser(){
+    localStorage.setItem('username', user);
+    localStorage.setItem('password', password);
+
+
   }
 
-  async function createUser() {
-    localStorage.setItem('userName', userName);
-    props.onLogin(userName);
+  function textChange(e){
+    setText(e.target.value);
   }
 
   return (
     <main>
       <div>
         <h2>Create an Account</h2>
-        <p>Note: Will Redirect to 3rd Party API GoOPT for Verification</p>
+        <p>Note: Will Redirect to 3rd Party API GoOPT for Verification instead of Vote</p>
         <form method="get" action="/vote">
             <ul>
-                <label for="NetID">NetID</label>
-                <input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="NetID" required />
+                <label for="Username">Username</label>
+                <input type="text" onChange={textChange} placeholder="Username" required />
             </ul>
             <ul>
                 <label for="password">Password</label>
-                <input type="text" onChange={(e) => setUserName(e.target.value)} placeholder="Password" required />
+                <input type="text" onChange={textChange} placeholder="Password" required />
             </ul>
-            <button type="submit">Create</button>
+            <button type="submit" onClick={loginUser}>Create</button>
         </form>
 
         <h2>Login</h2>
-        <p>Note: Will Redirect to 3rd Party API GoOPT for Verification</p>
         <form method="get" action="/results">
-            <ul>
-                <label for="NetID">NetID</label>
-                <input type="text" placeholder="NetID" required />
-            </ul>
-            <ul>
-                <label for="password">Password</label>
-                <input type="text" placeholder="Password" required />
-            </ul>
+          
             <button type="submit">Login</button>
         </form>
       </div>
