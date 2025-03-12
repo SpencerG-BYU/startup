@@ -8,6 +8,10 @@ export function Login({setUser}) {
   const navigate = useNavigate();
   
   function handleRegister(){
+    if (!username || !password) {
+      alert('Username and password required');
+      return;
+    }
     createAuth('POST', '/api/auth/create', '/vote');
   }
 
@@ -24,17 +28,17 @@ export function Login({setUser}) {
   }
 
   async function createAuth(method, fetchPath, navigatePath){
-    const response = await fetch(fetchPath, {
-      method: method,
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, password}),
-    });
-    await response.json();
-    if (response.ok) {
-      navigate(navigatePath);
-    } else {
-      alert('Authentication failed');
-    }
+      const response = await fetch(fetchPath, {
+        method: method,
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password}),
+      });
+      const body = await response.json();
+      if (response?.status === 200) {
+        navigate(navigatePath);
+      } else {  
+        alert(body.msg);
+      }
   }
 
   return (

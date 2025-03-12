@@ -32,11 +32,11 @@ apiRouter.post('/auth/create', async (req, res) => {
 //Login endpoint
 apiRouter.put('/auth/login', async (req, res) => {
     const user = await getUser('username', req.body.username);
-    if (user && (await bcrypt.compare(req.body.password, user.password))) {
+    if (!user) res.status(401).send({msg: 'User Does Not Exist'});
+    if (!(await bcrypt.compare(req.body.password, user.password))) res.status(401).send({ msg: 'Incorrect Username or Password' });
+    else {
       setAuthCookie(res, user);
       res.send({ username: user.username });
-    } else {
-      res.status(401).send({ msg: 'Unauthorized' });
     }
   });
 
@@ -55,7 +55,7 @@ apiRouter.get('/user/me', async (req, res) => {
     if (user) {
       res.send({ username: user.username });
     } else {
-      res.status(401).send({ msg: 'Unauthorized' });
+      res.status(401).send({ msg: 'User Does Not Exist' });
     }
   });
 
