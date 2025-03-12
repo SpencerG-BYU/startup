@@ -7,6 +7,8 @@ export function Results() {
     const [results, setResults] = React.useState({});
     const navigate = useNavigate();
     const [msg, setMsg] = React.useState('...listening');
+    const [quote, setQuote] = React.useState('Loading...');
+    const [author, setAuthor] = React.useState('');
     const questions = [
         {question: "What Utensil Do You Eat Mac N Cheese With?", options: ["Fork", "Spoon"], image: "macncheese.png"},
         {question: "Is Water Wet?", options: ["Wet", "Not Wet"], image: "water1.png"},
@@ -15,6 +17,10 @@ export function Results() {
         {question: "Is Gif pronounced 'Gif' or 'Jif'?", options: ["Gif", "Jif"], image: "https://data.textstudio.com/output/sample/animated/3/9/4/7/gif-5-17493.gif"},
         {question: "Are Panckaes or Waffles Better?", options: ["Pancakes", "Waffles"], image: "breakfast.png"}
     ];
+
+    const countVotes = (questionIndex, option) => {
+        return results[questionIndex] && results[questionIndex][option] !== undefined ? results[questionIndex][option] : 0;
+    };
 
     React.useEffect(() => {
         async function fetchResults() {
@@ -25,9 +31,6 @@ export function Results() {
         fetchResults();
     }, []);
 
-    const countVotes = (questionIndex, option) => {
-        return results[questionIndex] && results[questionIndex][option] !== undefined ? results[questionIndex][option] : 0;
-    };
 
     //Placeholder for WebSocket
     React.useEffect(() => {
@@ -54,6 +57,16 @@ export function Results() {
         return () => clearInterval(intervalId);
     }, [results]);
 
+    React.useEffect(() => {
+        fetch('https://quote.cs260.click')
+        .then((response) => response.json())
+        .then((data) => {
+          setQuote(data.quote);
+          setAuthor(data.author || 'Unknown');
+        })
+        .catch();
+    }, []);
+
     function handleLogout(){
         fetch('api/auth/logout', {
             method: 'DELETE',
@@ -75,8 +88,10 @@ export function Results() {
                             </li>
                         ))}
                     </ul>
-                </div>
+            </div>
             ))}
+            <p className='quote'>"{quote}"</p>
+            <p className='author'>{author}</p>
             <button onClick={() => navigate('/vote')}>Vote Again</button>
             <button onClick={handleLogout}>Logout</button>
         </main>
