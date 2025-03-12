@@ -43,12 +43,12 @@ export function Login({setUser}) {
         <p>Note: Will Eventually Redirect to 3rd Party API for Verification instead of Vote</p>
         <div>
             <ul>
-                <label htmlFor="Username">Username</label>
-                <input type="text" onChange={userChange} placeholder="Username" />
+                <label htmlFor="username">Username</label>
+                <input id="username" type="text" onChange={userChange} placeholder="Username" />
             </ul>
             <ul>
                 <label htmlFor="password">Password</label>
-                <input type="text" onChange={passwordChange} placeholder="Password" />
+                <input id="password" type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
             <button onClick={handleRegister}>Create</button>
             <button onClick={handleLogin}>Login</button>

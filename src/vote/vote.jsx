@@ -16,17 +16,9 @@ export function Vote() {
     const [votes, setVotes] = React.useState({});
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        const savedVotes = JSON.parse(localStorage.getItem('votes'));
-        if (savedVotes) {
-            setVotes(savedVotes);
-        }
-    }, []);
-
     const handleVoteChange = (question, option) => {
         setVotes(prevVotes => {
             const newVotes = {...prevVotes, [question]: option};
-            localStorage.setItem('votes', JSON.stringify(newVotes));
             return newVotes;
         });
     };
@@ -38,7 +30,6 @@ export function Vote() {
             alert('Please answer all questions before submitting');
             return;
         } else {
-            localStorage.setItem('results', JSON.stringify(votes));
             saveVotes();
         }
     };
