@@ -23,7 +23,7 @@ export default function App() {
                     {user && <NavLink className='nav-link' to='vote'>Vote</NavLink>}
                 </li>
                 <li>
-                    {user && <NavLink className='nav-link' to='results'>Results</NavLink>}
+                   {user && <NavLink className='nav-link' to='results'>Results</NavLink>}
                 </li>
             </ul>
         </nav>
