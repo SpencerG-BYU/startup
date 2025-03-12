@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
 const users = [];
-const votes = {};
+const vote_total = [{Fork:0, Spoon:0}, {Wet:0, NotWet:0}, {Soup:0, NotSoup:0}, {HeckYes:0, AbsolutelyNot:0}, {Gif:0, Jif:0}, {Pancakes:0, Waffles:0}];
 
 app.use(express.json());
 app.use(cookieParser());
@@ -19,7 +19,7 @@ app.use(`/api`, apiRouter);
 
 
 //Registration endpoint
-apiRouter.post('/api/auth', async (req, res) => {
+apiRouter.post('/auth', async (req, res) => {
     if (await getUser('username', req.body.username)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
@@ -30,7 +30,7 @@ apiRouter.post('/api/auth', async (req, res) => {
   });
 
 //Login endpoint
-apiRouter.put('/api/auth', async (req, res) => {
+apiRouter.put('/auth', async (req, res) => {
     const user = await getUser('username', req.body.username);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       setAuthCookie(res, user);
@@ -41,7 +41,7 @@ apiRouter.put('/api/auth', async (req, res) => {
   });
 
 //Logout endpoints
-apiRouter.delete('/api/auth', async (req, res) => {
+apiRouter.delete('/auth', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -52,7 +52,7 @@ apiRouter.delete('/api/auth', async (req, res) => {
   });
 
 // Get user endpoint
-apiRouter.get('/api/user/me', async (req, res) => {
+apiRouter.get('/user/me', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -72,7 +72,20 @@ const verifyAuth = async (req, res, next) => {
     }
   };
 
+  
+// Submit votes
+apiRouter.post('/votes', verifyAuth, (req, res) => {
+    vote_total = updateVotes(req.body);
+  });
 
+async function updateVotes(votes) {
+    for (let i = 0; i < vote_total.length; i++) {
+      for (const [key, value] of Object.entries(vote_total[i])) {
+        vote_total[i][key] += votes[key];
+      }
+    }
+    return vote_total;
+}
 
 
 async function createUser(username, password) {

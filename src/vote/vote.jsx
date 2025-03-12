@@ -44,7 +44,7 @@ export function Vote() {
     };
 
     async function saveVotes(){
-        const response = await fetch('/api/vote', {
+        const response = await fetch('/api/votes', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(votes),
