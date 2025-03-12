@@ -19,7 +19,7 @@ app.use(`/api`, apiRouter);
 
 
 //Registration endpoint
-apiRouter.post('/auth', async (req, res) => {
+apiRouter.post('/auth/create', async (req, res) => {
     if (await getUser('username', req.body.username)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
@@ -30,7 +30,7 @@ apiRouter.post('/auth', async (req, res) => {
   });
 
 //Login endpoint
-apiRouter.put('/auth', async (req, res) => {
+apiRouter.put('/auth/login', async (req, res) => {
     const user = await getUser('username', req.body.username);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       setAuthCookie(res, user);
@@ -41,7 +41,7 @@ apiRouter.put('/auth', async (req, res) => {
   });
 
 //Logout endpoints
-apiRouter.delete('/auth', async (req, res) => {
+apiRouter.delete('/auth/logout', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -72,8 +72,6 @@ const verifyAuth = async (req, res, next) => {
     }
   };
 
-  
-// Submit votes
 apiRouter.post('/votes', verifyAuth, (req, res) => {
     vote_total = updateVotes(req.body);
   });
@@ -86,7 +84,6 @@ async function updateVotes(votes) {
     }
     return vote_total;
 }
-
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);

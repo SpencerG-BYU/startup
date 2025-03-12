@@ -53,7 +53,7 @@ export function Results() {
     }, [results]);
 
     function handleLogout(){
-        fetch('api/auth', {
+        fetch('api/auth/logout', {
             method: 'DELETE',
         });
         navigate('/');

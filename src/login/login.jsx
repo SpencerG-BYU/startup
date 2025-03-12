@@ -8,11 +8,11 @@ export function Login({setUser}) {
   const navigate = useNavigate();
   
   function handleRegister(){
-    createAuth('POST', '/vote');
+    createAuth('POST', '/api/auth/create', '/vote');
   }
 
   function handleLogin(){
-    createAuth('PUT', '/results');
+    createAuth('PUT', '/api/auth/login', '/results');
   }
 
   function userChange(e){
@@ -23,15 +23,15 @@ export function Login({setUser}) {
     setPassword(e.target.value);
   }
 
-  async function createAuth(method, path){
-    const response = await fetch('/api/auth', {
+  async function createAuth(method, fetchPath, navigatePath){
+    const response = await fetch(fetchPath, {
       method: method,
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({username, password}),
     });
     await response.json();
     if (response.ok) {
-      navigate(path);
+      navigate(navigatePath);
     } else {
       alert('Authentication failed');
     }
