@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import './results.css';
 
 
-export function Results() {
+export function Results({setUser}) {
     const [results, setResults] = React.useState({});
     const navigate = useNavigate();
     const [msg, setMsg] = React.useState('...listening');
@@ -71,6 +71,8 @@ export function Results() {
         fetch('api/auth/logout', {
             method: 'DELETE',
         });
+        localStorage.removeItem('username');
+        setUser(null); 
         navigate('/');
       }     
 

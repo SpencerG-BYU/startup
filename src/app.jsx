@@ -27,13 +27,13 @@ export default function App() {
                 </li>
             </ul>
         </nav>
-        {<p>{user}</p>}
+        { user && <p>{user}</p>}
         </header>
 
         <Routes>
             <Route path='/' element={<Login setUser={setUser} />} />
             <Route path='/vote' element={<Vote />} />
-            <Route path='/results' element={<Results />} />
+            <Route path='/results' element={<Results setUser={setUser} />} />
             <Route path='*' element={<NotFound />} />
         </Routes>
 
