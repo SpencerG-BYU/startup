@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
 const users = [];
-const vote_total = [{Fork:0, Spoon:0}, {Wet:0, NotWet:0}, {Soup:0, NotSoup:0}, {HeckYes:0, AbsolutelyNot:0}, {Gif:0, Jif:0}, {Pancakes:0, Waffles:0}];
+const vote_total = [{"Fork":0, "Spoon":0}, {"Wet":0, "Not Wet":0}, {"Soup":0, "Not Soup":0}, {"Heck Yes":0, "Absolutely Not":0}, {"Gif":0, "Jif":0}, {"Pancakes":0, "Waffles":0}];
 
 app.use(express.json());
 app.use(cookieParser());
@@ -84,7 +84,6 @@ apiRouter.post('/votes', verifyAuth, (req, res) => {
     });
     res.send(vote_total);
   });
-
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);

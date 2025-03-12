@@ -26,7 +26,7 @@ export function Results() {
     }, []);
 
     const countVotes = (questionIndex, option) => {
-        return results[questionIndex] ? results[questionIndex][option] : 0;
+        return results[questionIndex] && results[questionIndex][option] !== undefined ? results[questionIndex][option] : 0;
     };
 
     //Placeholder for WebSocket
@@ -65,13 +65,13 @@ export function Results() {
         <main>
             <h2>Results</h2>
             <div className="updates">{msg}</div>
-            {questions.map((question, index) => (
-                <div key={index}>
+            {questions.map((question, questionIndex) => (
+                <div key={questionIndex}>
                     <h3>{question.question}</h3>
                     <ul>
-                        {question.options.map((option, index) => (
+                        {question.options.map((option, optionIndex) => (
                             <li key={optionIndex}>
-                                {option}: {countVotes(index, option)} votes
+                                {option}: {countVotes(questionIndex, option)} votes
                             </li>
                         ))}
                     </ul>

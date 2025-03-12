@@ -46,6 +46,7 @@ export function Vote() {
             body: JSON.stringify(formattedVotes),
         });
         if (response?.status === 200) {
+            console.log(response);
             navigate('/results');
         } else {
             alert('Vote failed');
