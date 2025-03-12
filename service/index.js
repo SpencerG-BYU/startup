@@ -4,6 +4,9 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 
+const users = [];
+const votes = {};
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -59,7 +62,18 @@ apiRouter.get('/api/user/me', async (req, res) => {
     }
   });
 
-const users = [];
+// Middleware to verify that the user is authorized to call an endpoint
+const verifyAuth = async (req, res, next) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    if (user) {
+      next();
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  };
+
+
+
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);

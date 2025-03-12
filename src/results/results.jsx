@@ -27,6 +27,7 @@ export function Results() {
         return Object.values(results).filter(vote => vote === option).length;
     };
 
+    //Placeholder for WebSocket
     React.useEffect(() => {
         const intervalId = setInterval(() => {
             const randomQuestionIndex = Math.floor(Math.random() * questions.length);

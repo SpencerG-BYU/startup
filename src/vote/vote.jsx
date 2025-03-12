@@ -39,9 +39,23 @@ export function Vote() {
             return;
         } else {
             localStorage.setItem('results', JSON.stringify(votes));
-            navigate('/results');
+            saveVotes();
         }
     };
+
+    async function saveVotes(){
+        const response = await fetch('/api/vote', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(votes),
+        });
+        await response.json();
+        if (response.ok) {
+            navigate('/results');
+        } else {
+            alert('Vote failed');
+        }
+    }
 
   return (
     <main>
