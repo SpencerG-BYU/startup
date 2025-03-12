@@ -45,7 +45,7 @@ export function Vote() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formattedVotes),
         });
-        if (response.ok) {
+        if (response?.status === 200) {
             navigate('/results');
         } else {
             alert('Vote failed');
@@ -59,7 +59,7 @@ export function Vote() {
         <form onSubmit={handleSubmit}>
         {questions.map((question, index) => (
             <ul className="radio" key={index}>
-                <label className="question" for="text">{question.question}</label>
+                <label className="question" htmlFor="text">{question.question}</label>
                 <div> <img src={question.image} alt={question.question} width="500" /></div>
                 <li>
                   {question.options.map((option, index) => (
@@ -71,7 +71,7 @@ export function Vote() {
                             onChange={() => handleVoteChange(question.question, option)}
                             required
                         />
-                        <label className="option" for={option}>{option}</label>
+                        <label className="option" htmlFor={option}>{option}</label>
                     </div>
                 ))}
                 </li>
