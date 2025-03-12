@@ -77,7 +77,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Proper HTML element usage** - Each page has a Header and Footer.
 - [x] **Links** - The login buttons and the temporary navigation section links to the other pages.
 - [x] **Text** - There is text for each of the options and titles of questions.
-- [x] **3rd party API placeholder** - The Login buttons will eventually link to a 3rd party API which will verify the user via a one-time-password.
+- [x] **3rd party API placeholder** - The Results page will have a cool programming quote on it.
 - [x] **Images** - Each question has an image representing the controversy below it.
 - [x] **Login placeholder** - The Login has a place to enter a user's netID and password.
 - [x] **DB data placeholder** - The Results page has the placeholder for the votes for each option.
@@ -113,12 +113,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Check
+- [x] **Static middleware for frontend** - I use middleware to check if a user is verified to call an endpoint.
+- [x] **Calls to third party endpoints** - My frontend gets quotes and an author from a third party endpoint.
+- [x] **Backend service endpoints** - I have backend endpoints for creating/logging in/out a user, getting a user, and getting/updating the total votes for each option.
+- [x] **Frontend calls service endpoints** - My frontend calls my service endpoints when a user logs in/out and when the votes are submitted.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Endpoints are restricted if a user is not verified, and the rest are explained above.
 
 ## 🚀 DB/Login deliverable
 
