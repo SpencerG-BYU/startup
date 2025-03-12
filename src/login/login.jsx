@@ -41,7 +41,7 @@ export function Login({setUser}) {
                 <input type="text" onChange={userChange} placeholder="Username" />
             </ul>
             <ul>
-                <label ntmlFor="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
             <button onClick={createUser}>Create</button>
