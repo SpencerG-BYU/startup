@@ -85,6 +85,7 @@ apiRouter.post('/votes', verifyAuth, (req, res) => {
     res.send(vote_total);
   });
 
+
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = {

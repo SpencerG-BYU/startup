@@ -29,7 +29,8 @@ export function Login({setUser}) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({username, password}),
     });
-    if (response?.status === 200) {
+    await response.json();
+    if (response.ok) {
       navigate(navigatePath);
     } else {
       alert('Authentication failed');
