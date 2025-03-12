@@ -7,20 +7,12 @@ export function Login({setUser}) {
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
   
-  function createUser(){
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
-    setUser(username);
-    navigate('/vote');
+  function handleRegister(){
+    createAuth('POST', '/vote');
   }
 
-  function loginUser(){
-    if (localStorage.getItem('username') === username && localStorage.getItem('password') === password){
-      setUser(username);
-      navigate('/results');
-    } else {
-      alert('Invalid username or password');
-    }
+  function handleLogin(){
+    createAuth('PUT', '/results');
   }
 
   function userChange(e){
@@ -29,6 +21,20 @@ export function Login({setUser}) {
 
   function passwordChange(e){
     setPassword(e.target.value);
+  }
+
+  async function createAuth(method, path){
+    const response = await fetch('/api/auth', {
+      method: method,
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username, password}),
+    });
+    await response.json();
+    if (response.ok) {
+      navigate(path);
+    } else {
+      alert('Authentication failed');
+    }
   }
 
   return (
@@ -44,8 +50,8 @@ export function Login({setUser}) {
                 <label htmlFor="password">Password</label>
                 <input type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
-            <button onClick={createUser}>Create</button>
-            <button onClick={loginUser}>Login</button>
+            <button onClick={handleRegister}>Create</button>
+            <button onClick={handleLogin}>Login</button>
         </div>        
     </main>
   );

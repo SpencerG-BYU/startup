@@ -1,18 +1,14 @@
 const express = require('express');
+const app = express();
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const cookieParser = require('cookie-parser');
 
+app.use(express.json());
 app.use(cookieParser());
-
-token: uuid.v4();
-
-const users = [];
-const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-app.use(express.json());
 app.use(express.static('public'));
 
 let apiRouter = express.Router();
@@ -20,7 +16,7 @@ app.use(`/api`, apiRouter);
 
 
 //Registration endpoint
-app.post('/api/auth', async (req, res) => {
+apiRouter.post('/api/auth', async (req, res) => {
     if (await getUser('username', req.body.username)) {
       res.status(409).send({ msg: 'Existing user' });
     } else {
@@ -31,7 +27,7 @@ app.post('/api/auth', async (req, res) => {
   });
 
 //Login endpoint
-app.put('/api/auth', async (req, res) => {
+apiRouter.put('/api/auth', async (req, res) => {
     const user = await getUser('username', req.body.username);
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       setAuthCookie(res, user);
@@ -42,7 +38,7 @@ app.put('/api/auth', async (req, res) => {
   });
 
 //Logout endpoints
-app.delete('/api/auth', async (req, res) => {
+apiRouter.delete('/api/auth', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -53,7 +49,7 @@ app.delete('/api/auth', async (req, res) => {
   });
 
 // Get user endpoint
-app.get('/api/user/me', async (req, res) => {
+apiRouter.get('/api/user/me', async (req, res) => {
     const token = req.cookies['token'];
     const user = await getUser('token', token);
     if (user) {
@@ -63,16 +59,15 @@ app.get('/api/user/me', async (req, res) => {
     }
   });
 
+const users = [];
+
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
-  
     const user = {
       username: username,
       password: passwordHash,
     };
-  
     users.push(user);
-  
     return user;
   }
   
@@ -86,7 +81,7 @@ function getUser(field, value) {
 // Create a token for the user and send a cookie containing the token
 function setAuthCookie(res, user) {
     user.token = uuid.v4();
-  
+
     res.cookie('token', user.token, {
       secure: true,
       httpOnly: true,
