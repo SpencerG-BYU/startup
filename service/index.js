@@ -6,6 +6,7 @@ const uuid = require('uuid');
 
 const users = [];
 const vote_total = [{"Fork":0, "Spoon":0}, {"Wet":0, "Not Wet":0}, {"Soup":0, "Not Soup":0}, {"Heck Yes":0, "Absolutely Not":0}, {"Gif":0, "Jif":0}, {"Pancakes":0, "Waffles":0}];
+const userVotes = {};
 
 app.use(express.json());
 app.use(cookieParser());
@@ -74,14 +75,42 @@ apiRouter.get('/vote_total', verifyAuth, (_req, res) => {
   });
 
 apiRouter.post('/votes', verifyAuth, (req, res) => {
+  const user = getUser('token', req.cookies['token']);
+  if (!user) {
+    return res.status(401).send({ msg: 'Unauthorized' });
+  }
+
+  //Initialize user's votes if they haven't voted yet
+  const userId = user.username;
+  if (!userVotes[userId]) {
+    userVotes[userId] = [];
+  }
+
     req.body.forEach(vote => {
+        const question = vote.question;
         const option = vote.option;
-        for (let i = 0; i < vote_total.length; i++) {
-            if (vote_total[i][option] !== undefined) {
-                vote_total[i][option] += 1;
+
+        //If the user has already voted on this question, decrement the previous option's vote count
+        if (userVotes[iserId][question] !== undefined) {
+          const previousOption = userVotes[userId][question];
+          vote_total.forEach(voteItem => {
+            if (voteItem[previousOption] !== undefined) {
+              voteItem[previousOption] -= 1;
             }
+          });
         }
+
+        //Updates the user's vote for the question
+        userVotes[userId][question] = option;
+
+        //Increment the vote count for the new options
+        vote_total.forEach(voteItem => {
+          if (voteItem[option] !== undefined) {
+            voteItem[option] += 1;
+          }
+        });
     });
+
     res.send(vote_total);
   });
 
