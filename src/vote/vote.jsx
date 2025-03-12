@@ -37,7 +37,7 @@ export function Vote() {
     async function saveVotes(){
         const formattedVotes = questions.map(question => {
             const option = votes[question.question];
-            return {option};
+            return {question: question.question, option};
         });
         
         const response = await fetch('/api/votes', {
@@ -46,7 +46,6 @@ export function Vote() {
             body: JSON.stringify(formattedVotes),
         });
         if (response?.status === 200) {
-            console.log(response);
             navigate('/results');
         } else {
             alert('Vote failed');

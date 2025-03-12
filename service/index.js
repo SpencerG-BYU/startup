@@ -79,40 +79,40 @@ apiRouter.post('/votes', verifyAuth, (req, res) => {
   if (!user) {
     return res.status(401).send({ msg: 'Unauthorized' });
   }
-
+  
   //Initialize user's votes if they haven't voted yet
   const userId = user.username;
   if (!userVotes[userId]) {
     userVotes[userId] = [];
   }
-
-    req.body.forEach(vote => {
-        const question = vote.question;
-        const option = vote.option;
-
-        //If the user has already voted on this question, decrement the previous option's vote count
-        if (userVotes[iserId][question] !== undefined) {
-          const previousOption = userVotes[userId][question];
-          vote_total.forEach(voteItem => {
-            if (voteItem[previousOption] !== undefined) {
-              voteItem[previousOption] -= 1;
-            }
-          });
+  
+  req.body.forEach(vote => {
+  const question = vote.question;
+  const option = vote.option;
+  
+    //If the user has already voted on this question, decrement the previous option's vote count
+    if (userVotes[userId][question] !== undefined) {
+      const previousOption = userVotes[userId][question];
+      vote_total.forEach(voteItem => {
+        if (voteItem[previousOption] !== undefined) {
+          voteItem[previousOption] -= 1;
         }
-
-        //Updates the user's vote for the question
-        userVotes[userId][question] = option;
-
-        //Increment the vote count for the new options
-        vote_total.forEach(voteItem => {
-          if (voteItem[option] !== undefined) {
-            voteItem[option] += 1;
-          }
-        });
+      });
+    }
+  
+    //Updates the user's vote for the question
+    userVotes[userId][question] = option;
+  
+    //Increment the vote count for the new options
+    vote_total.forEach(voteItem => {
+      if (voteItem[option] !== undefined) {
+        voteItem[option] += 1;
+      }
     });
-
-    res.send(vote_total);
   });
+  
+  res.send(vote_total);
+});
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
