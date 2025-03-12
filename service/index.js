@@ -10,7 +10,7 @@ const vote_total = [{Fork:0, Spoon:0}, {Wet:0, NotWet:0}, {Soup:0, NotSoup:0}, {
 app.use(express.json());
 app.use(cookieParser());
 
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.static('public'));
 
