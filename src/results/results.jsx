@@ -77,7 +77,7 @@ export function Results() {
                     </ul>
                 </div>
             ))}
-            <button onClick={() => navigate('/vote')}>Re-Vote</button>
+            <button onClick={() => navigate('/vote')}>Vote Again</button>
             <button onClick={handleLogout}>Logout</button>
         </main>
     );

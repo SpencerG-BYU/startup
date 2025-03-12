@@ -14,20 +14,7 @@ export default function App() {
     <div>
         <header>
         <h1>Controversy Solver</h1>
-        <nav>
-            <ul>
-                <li>
-                    <NavLink className='nav-link' to=''>Login</NavLink>
-                </li>
-                <li>
-                    <NavLink className='nav-link' to='vote'>Vote</NavLink>
-                </li>
-                <li>
-                    <NavLink className='nav-link' to='results'>Results</NavLink>
-                </li>
-            </ul>
-        </nav>
-        {user && <p>{user}</p>}
+        {<p>{user}</p>}
         </header>
 
         <Routes>

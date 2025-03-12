@@ -35,6 +35,8 @@ export function Login({setUser}) {
       });
       const body = await response.json();
       if (response?.status === 200) {
+        setUser(body.username);
+        localStorage.setItem('username', body.username);
         navigate(navigatePath);
       } else {  
         alert(body.msg);
@@ -44,7 +46,6 @@ export function Login({setUser}) {
   return (
     <main>
         <h2>Create an Account</h2>
-        <p>Note: Will Eventually Redirect to 3rd Party API for Verification instead of Vote</p>
         <div>
             <ul>
                 <label htmlFor="username">Username</label>
