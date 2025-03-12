@@ -45,16 +45,6 @@ export function Login({setUser}) {
                 <input type="text" onChange={passwordChange} placeholder="Password" />
             </ul>
             <button onClick={createUser}>Create</button>
-
-        <h2>Login</h2>
-          <ul>
-              <label htmlFor="Username">Username</label>
-              <input type="text" onChange={userChange} placeholder="Username" />
-          </ul>
-          <ul>
-              <label htmlFor="password">Password</label>
-              <input type="text" onChange={passwordChange} placeholder="Password" />
-          </ul>
             <button onClick={loginUser}>Login</button>
         </div>        
     </main>
