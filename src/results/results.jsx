@@ -51,11 +51,11 @@ export function Results() {
         return () => clearInterval(intervalId);
     }, [results]);
 
-    function logout(){
+    function handleLogout(){
+        fetch('api/auth', {
+            method: 'DELETE',
+        });
         navigate('/');
-        localStorage.removeItem('username');
-        localStorage.removeItem('password');
-        setUser('');       
       }     
 
     return (
@@ -75,7 +75,7 @@ export function Results() {
                 </div>
             ))}
             <button onClick={() => navigate('/vote')}>Re-Vote</button>
-            <button onClick={() => logout()}>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
         </main>
     );
 }
