@@ -54,7 +54,6 @@ export function Vote() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(formattedVotes),
         });
-        await response.json();
         if (response.ok) {
             navigate('/results');
         } else {

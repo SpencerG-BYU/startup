@@ -42,19 +42,16 @@ apiRouter.put('/auth/login', async (req, res) => {
 
 //Logout endpoints
 apiRouter.delete('/auth/logout', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
+    const user = await getUser('token', req.cookies);
     if (user) {
       clearAuthCookie(res, user);
     }
-  
     res.send({});
   });
 
 // Get user endpoint
 apiRouter.get('/user/me', async (req, res) => {
-    const token = req.cookies['token'];
-    const user = await getUser('token', token);
+    const user = await getUser('token', req.cookies['token']);
     if (user) {
       res.send({ username: user.username });
     } else {
@@ -64,7 +61,7 @@ apiRouter.get('/user/me', async (req, res) => {
 
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
-    const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await getUser('token', req.cookies['token']);
     if (user) {
       next();
     } else {
@@ -77,11 +74,7 @@ apiRouter.get('/vote_total', verifyAuth, (_req, res) => {
   });
 
 apiRouter.post('/votes', verifyAuth, (req, res) => {
-    vote_total = updateVotes(req.body);
-  });
-
-async function updateVotes(votes) {
-    votes.forEach(vote => {
+    req.body.forEach(vote => {
         const option = vote.option;
         for (let i = 0; i < vote_total.length; i++) {
             if (vote_total[i][option] !== undefined) {
@@ -89,8 +82,8 @@ async function updateVotes(votes) {
             }
         }
     });
-    return vote_total;
-}
+    res.send(vote_total);
+  });
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
