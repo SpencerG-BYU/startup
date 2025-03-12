@@ -50,7 +50,13 @@ export function Results() {
 
         return () => clearInterval(intervalId);
     }, [results]);
-            
+
+    function logout(){
+        navigate('/');
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
+        setUser('');       
+      }     
 
     return (
         <main>
@@ -69,6 +75,7 @@ export function Results() {
                 </div>
             ))}
             <button onClick={() => navigate('/vote')}>Re-Vote</button>
+            <button onClick={() => logout()}>Logout</button>
         </main>
     );
 }
