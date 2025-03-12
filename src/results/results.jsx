@@ -17,14 +17,16 @@ export function Results() {
     ];
 
     React.useEffect(() => {
-        const savedResults = JSON.parse(localStorage.getItem('results'));
-        if (savedResults) {
-            setResults(savedResults);
+        async function fetchResults() {
+            const response = await fetch('/api/vote_total');
+            const data = await response.json();
+            setResults(data);
         }
+        fetchResults();
     }, []);
 
-    const countVotes = (question, option) => {
-        return Object.values(results).filter(vote => vote === option).length;
+    const countVotes = (questionIndex, option) => {
+        return results[questionIndex] ? results[questionIndex][option] : 0;
     };
 
     //Placeholder for WebSocket
@@ -68,8 +70,8 @@ export function Results() {
                     <h3>{question.question}</h3>
                     <ul>
                         {question.options.map((option, index) => (
-                            <li key={index}>
-                                {option}: {countVotes(question.question, option)} votes
+                            <li key={optionIndex}>
+                                {option}: {countVotes(index, option)} votes
                             </li>
                         ))}
                     </ul>

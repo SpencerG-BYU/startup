@@ -44,10 +44,15 @@ export function Vote() {
     };
 
     async function saveVotes(){
+        const formattedVotes = questions.map(question => {
+            const option = votes[question.question];
+            return {option};
+        });
+        
         const response = await fetch('/api/votes', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(votes),
+            body: JSON.stringify(formattedVotes),
         });
         await response.json();
         if (response.ok) {

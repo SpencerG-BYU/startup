@@ -72,16 +72,23 @@ const verifyAuth = async (req, res, next) => {
     }
   };
 
+apiRouter.get('/vote_total', verifyAuth, (_req, res) => {
+    res.send(vote_total);
+  });
+
 apiRouter.post('/votes', verifyAuth, (req, res) => {
     vote_total = updateVotes(req.body);
   });
 
 async function updateVotes(votes) {
-    for (let i = 0; i < vote_total.length; i++) {
-      for (const [key, value] of Object.entries(vote_total[i])) {
-        vote_total[i][key] += votes[key];
-      }
-    }
+    votes.forEach(vote => {
+        const option = vote.option;
+        for (let i = 0; i < vote_total.length; i++) {
+            if (vote_total[i][option] !== undefined) {
+                vote_total[i][option] += 1;
+            }
+        }
+    });
     return vote_total;
 }
 
