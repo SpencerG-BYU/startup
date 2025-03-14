@@ -103,15 +103,16 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
       userSubmission = { userId: userId, votes: {} };
     }
   
-    req.body.votes.forEach(vote => {  
+    for (const vote of req.body) {
       const question = vote.question;
       const option = vote.option;
       userSubmission.votes[question] = option;
-    });
+    };
 
     await DB.updateUserSubmission(userId, userSubmission.votes);
     res.send({});
-});
+  }
+);
 
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
