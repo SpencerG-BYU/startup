@@ -103,15 +103,14 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
       userSubmission = { userId: userId, votes: {} };
     }
   
-  for (const vote of req.body) {
-    const question = vote.question;
-    const option = vote.option;
-    userSubmission.votes[question] = option;
-  }
+    req.body.votes.forEach(vote => {  
+      const question = vote.question;
+      const option = vote.option;
+      userSubmission.votes[question] = option;
+    });
 
-  await DB.updateUserSubmission(userId, userSubmission.votes);
-
-  res.send({});
+    await DB.updateUserSubmission(userId, userSubmission.votes);
+    res.send({});
 });
 
 async function createUser(username, password) {
