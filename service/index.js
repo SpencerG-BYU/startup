@@ -5,9 +5,6 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const DB = require('./database.js');
 
-const vote_total = [{"Fork":0, "Spoon":0}, {"Wet":0, "Not Wet":0}, {"Soup":0, "Not Soup":0}, {"Heck Yes":0, "Absolutely Not":0}, {"Gif":0, "Jif":0}, {"Pancakes":0, "Waffles":0}];
-const userVotes = {};
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -70,48 +67,63 @@ const verifyAuth = async (req, res, next) => {
     }
   };
 
+  // Create a token for the user and send a cookie containing the token
+function setAuthCookie(res, user) {
+  user.token = uuid.v4();
+  DB.updateUser(user);
+  res.cookie('token', user.token, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+// Clear the token from the user and remove the cookie
+function clearAuthCookie(res, user) {
+  delete user.token;
+  DB.updateUser(user);
+  res.clearCookie('token');
+}
+
 apiRouter.get('/vote_total', verifyAuth, (_req, res) => {
-    res.send(vote_total);
+    const voteTotal = DB.getVoteTotal();
+    res.send(voteTotal);
   });
 
-apiRouter.post('/votes', verifyAuth, (req, res) => {
-  const user = getUser('token', req.cookies['token']);
+apiRouter.post('/votes', verifyAuth, async (req, res) => {
+  const user = await getUser('token', req.cookies['token']);
   if (!user) {
     return res.status(401).send({ msg: 'Unauthorized' });
   }
   
   //Initialize user's votes if they haven't voted yet
   const userId = user.username;
-  if (!userVotes[userId]) {
-    userVotes[userId] = [];
+  let userSubmission = await DB.getUserSubmission(userId);
+  if (!userSubmission) {
+    userSubmission = { userId: userId, votes: {}};
   }
   
-  req.body.forEach(vote => {
-  const question = vote.question;
-  const option = vote.option;
+  req.body.forEach(async vote => {
+    const question = vote.question;
+    const option = vote.option;
   
     //If the user has already voted on this question, decrement the previous option's vote count
-    if (userVotes[userId][question] !== undefined) {
-      const previousOption = userVotes[userId][question];
-      vote_total.forEach(voteItem => {
-        if (voteItem[previousOption] !== undefined) {
-          voteItem[previousOption] -= 1;
-        }
-      });
+    if (userSubmission.votes[question] !== undefined) {
+      const previousOption = userSubmission.votes[question];
+      await DB.updateVoteCount(question, previousOption, -1);
     }
   
     //Updates the user's vote for the question
-    userVotes[userId][question] = option;
+    userSubmission.votes[question] = option;
   
     //Increment the vote count for the new options
-    vote_total.forEach(voteItem => {
-      if (voteItem[option] !== undefined) {
-        voteItem[option] += 1;
-      }
-    });
+    await DB.updateVoteCount(question, option, 1);
   });
-  
-  res.send(vote_total);
+
+  await DB.updateUserSubmission(userId, userSubmission.votes);
+
+  const voteTotal = DB.getVoteTotal();
+  res.send(voteTotal);
 });
 
 async function createUser(username, password) {
@@ -129,23 +141,6 @@ async function getUser(field, value) {
   if (field == 'token') return DB.findUserByToken(value);
   return DB.findUser(value);
 }
-
-// Create a token for the user and send a cookie containing the token
-function setAuthCookie(res, user) {
-    user.token = uuid.v4();
-
-    res.cookie('token', user.token, {
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-    });
-  }
-
-// Clear the token from the user and remove the cookie
-function clearAuthCookie(res, user) {
-    delete user.token;
-    res.clearCookie('token');
-  }
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

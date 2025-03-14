@@ -3,10 +3,10 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 
-//Connect to database cluster
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('users');
+const submissionCollection = db.collection('votes');
 
 (async function testConnection() { 
     try {
@@ -29,4 +29,61 @@ function findUser(username) {
 function findUserByToken(token) {
     return userCollection.findOne({token : token});
 }
+
+function updateUser(user) {
+    return userCollection.updateOne({username : user.username}, {$set : user});
+}
+
+function getUserSubmission(userID) {
+    return submissionCollection.findOne({userID : userID});
+}
+
+function updateUserSubmission(userID, votes) {
+    return submissionCollection.updateOne(
+        {userID : userID},
+        {$set : {votes: votes}},
+        {upsert : true}
+    );
+}
+async function getVoteTotal() {
+    const submissions = await submissionCollection.find({}).toArray();
+    const voteTotal = {};
+
+    submissions.forEach(submission => {
+        Object.keys(submission.votes).forEach(question => {
+            const option = submission.votes[question];
+            if (!voteTotal[question]) {
+                voteTotal[question] = {};
+            }
+            if (!voteTotal[question][option]) {
+                voteTotal[question][option] = 0;
+            }
+            voteTotal[question][option] += 1;
+        });
+    });
+
+    return voteTotal;
+}
+
+async function updateVoteCount(question, option, increment) {
+    const voteTotal = await getVoteTotal();
+    voteTotal[question][option] += increment;
+
+    await submissionCollection.updateOne(
+        { question: question },
+        { $set: { [option]: voteTotal[question][option] } },
+        { upsert: true }
+    );
+}
+
+module.exports = {
+    findUser,
+    findUserByToken,
+    addUser,
+    updateUser,
+    getUserSubmission,
+    updateUserSubmission,
+    getVoteTotal,
+    updateVoteCount
+  };
 
