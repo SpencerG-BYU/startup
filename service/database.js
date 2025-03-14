@@ -66,12 +66,9 @@ async function getVoteTotal() {
 }
 
 async function updateVoteCount(question, option, increment) {
-    const voteTotal = await getVoteTotal();
-    voteTotal[question][option] += increment;
-
     await submissionCollection.updateOne(
         { question: question },
-        { $set: { [option]: voteTotal[question][option] } },
+        { $set: { [option]: increment } },
         { upsert: true }
     );
 }
