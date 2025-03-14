@@ -85,8 +85,8 @@ function clearAuthCookie(res, user) {
   res.clearCookie('token');
 }
 
-apiRouter.get('/vote_total', verifyAuth, (_req, res) => {
-    const voteTotal = DB.getVoteTotal();
+apiRouter.get('/vote_total', verifyAuth, async (_req, res) => {
+    const voteTotal = await DB.getVoteTotal();
     res.send(voteTotal);
   });
 
@@ -122,8 +122,7 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
 
   await DB.updateUserSubmission(userId, userSubmission.votes);
 
-  const voteTotal = DB.getVoteTotal();
-  res.send(voteTotal);
+  res.send({});
 });
 
 async function createUser(username, password) {

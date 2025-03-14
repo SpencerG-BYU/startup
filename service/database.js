@@ -50,8 +50,9 @@ async function getVoteTotal() {
     const voteTotal = {};
 
     submissions.forEach(submission => {
-        Object.keys(submission.votes).forEach(question => {
-            const option = submission.votes[question];
+        const votes = submission.votes || {};
+        Object.keys(votes).forEach(question => {
+            const option = votes[question];
             if (!voteTotal[question]) {
                 voteTotal[question] = {};
             }
@@ -62,13 +63,14 @@ async function getVoteTotal() {
         });
     });
 
+    console.log(voteTotal);
     return voteTotal;
 }
 
 async function updateVoteCount(question, option, increment) {
     await submissionCollection.updateOne(
         { question: question },
-        { $set: { [option]: increment } },
+        { $inc: { [option]: increment } },
         { upsert: true }
     );
 }
