@@ -3,8 +3,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const DB = require('./database.js');
 
-const users = [];
 const vote_total = [{"Fork":0, "Spoon":0}, {"Wet":0, "Not Wet":0}, {"Soup":0, "Not Soup":0}, {"Heck Yes":0, "Absolutely Not":0}, {"Gif":0, "Jif":0}, {"Pancakes":0, "Waffles":0}];
 const userVotes = {};
 
@@ -120,15 +120,14 @@ async function createUser(username, password) {
       username: username,
       password: passwordHash,
     };
-    users.push(user);
+    DB.addUser(user);
     return user;
   }
   
-function getUser(field, value) {
-    if (value) {
-      return users.find((user) => user[field] === value);
-    }
-    return null;
+async function getUser(field, value) {
+  if (!value) return null;
+  if (field == 'token') return DB.findUserByToken(value);
+  return DB.findUser(value);
 }
 
 // Create a token for the user and send a cookie containing the token

@@ -5,45 +5,28 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 
 //Connect to database cluster
 const client = new MongoClient(url);
-const db = client.db('rental');
-const collection = db.collection('house');
+const db = client.db('startup');
+const userCollection = db.collection('users');
 
-async function main() { 
+(async function testConnection() { 
     try {
         await db.command({ping:1});
         console.log('DB connected to ${config.hostname}');
     } catch(ex) {
         console.log('Connection failed to ${url} because ${ex.message}');
         process.exit(1);
-    }    
-    
-    //insert documents
-    try {
-        const house = {
-            name: 'Beachfront views',
-            summary: 'From your bedroom to the beach, no shoes required',
-            property_type: 'Condo',
-            beds: 1,
-        };
-        await collection.insertOne(house);
+    } 
+})();
 
-        //Query documents
-        const query = { property_type: 'Condo', beds: { $lt: 2 } };
-        const options = {
-            sort: { name: -1 },
-            limit: 10,
-        };
-        const cursor = collection.find();
-        const rentals = await cursor.toArray();
-        rentals.forEach((i) => console.log(i));
+async function addUser(user) {
+    await userCollection.insertOne(user);
+}
 
-        //Delete documents
-        await collection.deleteMany(query);
-        } catch (ex) {
-            console.log('Database (${url}) error: ${ex.message}');
-        } finally {
-            await client.close();
-        }
-    }
+function findUser(username) {
+    return userCollection.findOne({username : username});
+}
 
-main();
+function findUserByToken(token) {
+    return userCollection.findOne({token : token});
+}
+
