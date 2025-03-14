@@ -18,8 +18,8 @@ export function Results({setUser}) {
         {question: "Are Pancakes or Waffles Better?", options: ["Pancakes", "Waffles"], image: "breakfast.png"}
     ];
 
-    const countVotes = (questionIndex, option) => {
-        return results[questionIndex] && results[questionIndex][option] !== undefined ? results[questionIndex][option] : 0;
+    const countVotes = (question, option) => {
+        return results[question] && results[question][option] !== undefined ? results[question][option] : 0;
     };
 
     React.useEffect(() => {

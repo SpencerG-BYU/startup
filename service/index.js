@@ -91,34 +91,23 @@ apiRouter.get('/vote_total', verifyAuth, async (_req, res) => {
   });
 
 apiRouter.post('/votes', verifyAuth, async (req, res) => {
-  const user = await getUser('token', req.cookies['token']);
-  if (!user) {
-    return res.status(401).send({ msg: 'Unauthorized' });
-  }
-  
-  //Initialize user's votes if they haven't voted yet
-  const userId = user.username;
-  let userSubmission = await DB.getUserSubmission(userId);
-  if (!userSubmission) {
-    userSubmission = { userId: userId, votes: {}};
-  }
-  
-  req.body.forEach(async vote => {
-    const question = vote.question;
-    const option = vote.option;
-  
-    //If the user has already voted on this question, decrement the previous option's vote count
-    if (userSubmission.votes[question] !== undefined) {
-      const previousOption = userSubmission.votes[question];
-      await DB.updateVoteCount(question, previousOption, -1);
+    const user = await getUser('token', req.cookies['token']);
+    if (!user) {
+      return res.status(401).send({ msg: 'Unauthorized' });
+    }
+    
+    // Initialize user's votes if they haven't voted yet
+    const userId = user.username;
+    let userSubmission = await DB.getUserSubmission(userId);
+    if (!userSubmission) {
+      userSubmission = { userId: userId, votes: {} };
     }
   
-    //Updates the user's vote for the question
+  for (const vote of req.body) {
+    const question = vote.question;
+    const option = vote.option;
     userSubmission.votes[question] = option;
-  
-    //Increment the vote count for the new options
-    await DB.updateVoteCount(question, option, 1);
-  });
+  }
 
   await DB.updateUserSubmission(userId, userSubmission.votes);
 

@@ -38,9 +38,9 @@ function getUserSubmission(userID) {
     return submissionCollection.findOne({userID : userID});
 }
 
-function updateUserSubmission(userID, votes) {
+function updateUserSubmission(userId, votes) {
     return submissionCollection.updateOne(
-        {userID : userID},
+        {userId : userId},
         {$set : {votes: votes}},
         {upsert : true}
     );
@@ -62,17 +62,7 @@ async function getVoteTotal() {
             voteTotal[question][option] += 1;
         });
     });
-
-    console.log(voteTotal);
     return voteTotal;
-}
-
-async function updateVoteCount(question, option, increment) {
-    await submissionCollection.updateOne(
-        { question: question },
-        { $inc: { [option]: increment } },
-        { upsert: true }
-    );
 }
 
 module.exports = {
@@ -82,7 +72,6 @@ module.exports = {
     updateUser,
     getUserSubmission,
     updateUserSubmission,
-    getVoteTotal,
-    updateVoteCount
+    getVoteTotal
   };
 
