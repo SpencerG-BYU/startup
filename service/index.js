@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
@@ -115,6 +114,11 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
   }
 );
 
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public'});
+});
+
 async function createUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
     const user = {
@@ -130,10 +134,6 @@ async function getUser(field, value) {
   if (field == 'token') return DB.findUserByToken(value);
   return DB.findUser(value);
 }
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-});
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
