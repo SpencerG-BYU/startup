@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
@@ -128,6 +129,10 @@ async function getUser(field, value) {
   if (!value) return null;
   if (field == 'token') return DB.findUserByToken(value);
   return DB.findUser(value);
+}
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
 }
 
 app.listen(port, () => {
