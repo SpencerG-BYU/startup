@@ -112,7 +112,7 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
 
     await DB.updateUserSubmission(userId, userSubmission.votes);
 
-    //Broadcast updated vote totals
+    //Broadcast user vote
     const message = `${userId} has voted!`;
     broadcast(JSON.stringify( { type: 'userVote', message}));
 
