@@ -120,7 +120,14 @@ export function Results({setUser}) {
             })}
             <p className='quote'>"{quote}"</p>
             <p className='author'>{author}</p>
-            <button onClick={() => navigate('/vote')}>Vote Again</button>
+            <button onClick={() => {
+                const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/ws`);
+                ws.onopen = () => {
+                    ws.send(JSON.stringify({ type: 'userStartVote', message: `${user} has started voting again!` }));
+                    ws.close();
+                };                
+                navigate('/vote');
+            }}>Vote Again</button>
             <button onClick={handleLogout}>Logout</button>
         </main>
     );

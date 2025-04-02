@@ -37,6 +37,15 @@ export function Login({setUser}) {
       if (response?.status === 200) {
         setUser(body.username);
         localStorage.setItem('username', body.username);
+
+        //WebSocket message for start of vote
+        if (navigatePath === '/vote') {
+          const ws = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/ws`);
+          ws.onopen = () => {
+            ws.send(JSON.stringify({ type: 'userStartVote', message: `${body.username} has joined the vote!` }));
+            ws.close();
+          };
+        }
         navigate(navigatePath);
       } else {  
         alert(body.msg);
