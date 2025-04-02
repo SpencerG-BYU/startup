@@ -94,18 +94,30 @@ export function Results({setUser}) {
                     msg.map((message, index) => <p key={index}>{message}</p>)
                 )}            
             </div>
-            {questions.map((question, questionIndex) => (
-                <div key={questionIndex}>
+            {questions.map((question, questionIndex) => {
+                const winnignOption = question.option.reduce((maxOption, option) => {
+                    return countVotes(question.question, option) > countVotes(question.question, maxOption)
+                        ? option
+                        : maxOption;
+                }, question.options[0]);
+
+                return (
+                  <div key={questionIndex}>
                     <h3>{question.question}</h3>
                     <ul>
                         {question.options.map((option, optionIndex) => (
-                            <li key={optionIndex}>
+                            <li 
+                                key={optionIndex}
+                                style = {{fontWeight: option === winningOption ? 'bold' : 'normal',
+                                }}
+                            >
                                 {option}: {countVotes(question.question, option)} votes
                             </li>
                         ))}
                     </ul>
-            </div>
-            ))}
+                  </div>
+                );
+            })}
             <p className='quote'>"{quote}"</p>
             <p className='author'>{author}</p>
             <button onClick={() => navigate('/vote')}>Vote Again</button>
