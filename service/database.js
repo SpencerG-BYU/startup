@@ -11,7 +11,7 @@ const submissionCollection = db.collection('votes');
 (async function testConnection() { 
     try {
         await db.command({ping:1});
-        console.log('DB connected to ${config.hostname}');
+        console.log(`DB connected to ${config.hostname}`);
     } catch(ex) {
         console.log('Connection failed to ${url} because ${ex.message}');
         process.exit(1);

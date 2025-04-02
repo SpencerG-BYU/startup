@@ -32,7 +32,7 @@ export function Results({setUser}) {
     }, []);
 
 
-    //Placeholder for WebSocket
+    //WebSocket
     React.useEffect(() => {
         let port = window.location.port;
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';

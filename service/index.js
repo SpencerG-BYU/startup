@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const DB = require('./database.js');
-const { leaderSocket, broadcast } = require('./leaderSocket.js');
+const { voteSocket, broadcast } = require('./voteSocket.js');
 
 app.use(express.json());
 app.use(cookieParser());
@@ -113,7 +113,7 @@ apiRouter.post('/votes', verifyAuth, async (req, res) => {
     await DB.updateUserSubmission(userId, userSubmission.votes);
 
     //Broadcast updated vote totals
-    const message = '${userId} has voted!';
+    const message = `${userId} has voted!`;
     broadcast(JSON.stringify( { type: 'userVote', message}));
 
     res.send({});
@@ -145,4 +145,4 @@ const httpService = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
-leaderSocket(httpService);
+voteSocket(httpService);

@@ -3,7 +3,7 @@ const uuid = require('uuid');
 
 let connections = [];
 
-function leaderSocket(httpServer) {
+function voteSocket(httpServer) {
     const wss = new WebSocketServer({ noServer: true });
 
     // Handle the protocol upgrade from HTTP to WebSocket
@@ -56,4 +56,4 @@ function broadcast(message) {
     });
   }
 
-module.exports = { leaderSocket, broadcast };
+module.exports = { voteSocket, broadcast };
