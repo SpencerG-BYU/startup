@@ -6,7 +6,7 @@ import './results.css';
 export function Results({setUser}) {
     const [results, setResults] = React.useState({});
     const navigate = useNavigate();
-    const [msg, setMsg] = React.useState('...listening');
+    const [msg, setMsg] = React.useState([]);
     const [quote, setQuote] = React.useState('Loading...');
     const [author, setAuthor] = React.useState('');
     const questions = [
@@ -43,7 +43,7 @@ export function Results({setUser}) {
             
             if (data.type === 'userVote') {
                 // Display the message when a user votes
-                setMsg(data.message);            
+                setMsg((prevMessages) => [...prevMessages, data.message]);            
             }
         };
 
@@ -87,7 +87,13 @@ export function Results({setUser}) {
     return (
         <main>
             <h2>Results</h2>
-            <div className="updates">{msg}</div>
+            <div className="updates">
+                {msg.length === 0? (
+                    <p>listening...</p>
+                ) : (
+                    msg.map((message, index) => <p key={index}>{message}</p>)
+                )}            
+            </div>
             {questions.map((question, questionIndex) => (
                 <div key={questionIndex}>
                     <h3>{question.question}</h3>
