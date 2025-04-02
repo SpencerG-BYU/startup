@@ -132,7 +132,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Backend listens for WebSocket connection** - voteSocket.js listens for Websocket.
-- [x] **Frontend makes WebSocket connection** - results.jsx makes the WebSocket connection.
-- [x] **Data sent over WebSocket connection** - The name of the user is sent when a user submits their votes
+- [x] **Frontend makes WebSocket connection** - results.jsx makes the WebSocket connection, and so does login.jsx.
+- [x] **Data sent over WebSocket connection** - A message including the name of the user is sent when a user starts and submits their votes. 
 - [x] **WebSocket data displayed** - The message is displayed in results.jsx.
 - [x] **Application is fully functional** - ControversySolver is fully functional.
