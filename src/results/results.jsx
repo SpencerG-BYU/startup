@@ -95,7 +95,7 @@ export function Results({setUser}) {
                 )}            
             </div>
             {questions.map((question, questionIndex) => {
-                const winnignOption = question.option.reduce((maxOption, option) => {
+                const winningOption = question.options.reduce((maxOption, option) => {
                     return countVotes(question.question, option) > countVotes(question.question, maxOption)
                         ? option
                         : maxOption;
