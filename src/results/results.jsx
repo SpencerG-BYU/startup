@@ -34,28 +34,33 @@ export function Results({setUser}) {
 
     //Placeholder for WebSocket
     React.useEffect(() => {
-        const intervalId = setInterval(() => {
-            const randomQuestionIndex = Math.floor(Math.random() * questions.length);
-            const randomQuestion = questions[randomQuestionIndex];
-            const randomOptionIndex = Math.floor(Math.random() * randomQuestion.options.length);
-            const randomOption = randomQuestion.options[randomOptionIndex];
-            const otherOption = randomQuestion.options[(randomOptionIndex + 1) % randomQuestion.options.length];
+        let port = window.location.port;
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        const ws = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
 
-            const randomOptionVotes = countVotes(randomQuestion.question, randomOption);
-            const otherOptionVotes = countVotes(randomQuestion.question, otherOption);
-
-            if (randomOptionVotes > otherOptionVotes) {
-                setMsg(`"${randomOption}" overtook "${otherOption}" from "${randomQuestion.question}"`);
-            } 
-            else if (randomOptionVotes == otherOptionVotes) {
-                setMsg(`"${randomOption}" and "${otherOption}" are tied from "${randomQuestion.question}"`);
-            } else {
-                setMsg(`"${otherOption}" is still leading from "${randomQuestion.question}"`);
+        ws.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            
+            if (data.type === 'userVote') {
+                // Display the message when a user votes
+                setMsg(data.message);            
             }
-        }, 7000);
+        };
 
-        return () => clearInterval(intervalId);
-    }, [results]);
+        ws.onclose = () => {
+            setMsg('WebSocket connection closed.');
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+            setMsg('WebSocket error occurred.');
+        };
+
+        return () => {
+            ws.close();
+        };
+    }, []);
+    
 
     React.useEffect(() => {
         fetch('https://quote.cs260.click')
@@ -64,7 +69,10 @@ export function Results({setUser}) {
           setQuote(data.quote);
           setAuthor(data.author || 'Unknown');
         })
-        .catch();
+        .catch((error) => {
+          console.error('Error fetching quote:', error);
+          setQuote('Error fetching quote');
+        });
     }, []);
 
     function handleLogout(){
