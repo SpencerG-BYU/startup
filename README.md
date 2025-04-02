@@ -38,8 +38,8 @@ sequenceDiagram
     actor User3
     actor Website
     User1->>Website: Voted for Fork
-    Website->>User2: Fork is Winning
-    Website->>User3: Fork is Winning
+    Website->>User2: User1 has Voted
+    Website->>User3: User1 has Voted
 ```
 
 ### Key features
@@ -49,7 +49,7 @@ sequenceDiagram
 - Displays images for each option
 - Only allows one vote per user
 - Votes stay permantly 
-- Displays winning option when winner changes
+- Displays when a user has voted
 - Highlights winning option after submitting votes
 
 ### Technologies
@@ -61,7 +61,7 @@ I am going to use the required technologies in the following ways.
 - **React** - Redirects user to results page when votes are submittied via a button press.
 - **Service** - Uses authentication API to verify user is logged in and hasn't already voted
 - **DB/Login** - Displays the amount of votes made for each option o nthe results page.
-- **WebSocket** - Notifies user if a new option receives more votes than current winner.
+- **WebSocket** - Notifies user if another user has voted.
 
 ## 🚀 AWS deliverable
 
@@ -131,8 +131,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - voteSocket.js listens for Websocket.
+- [x] **Frontend makes WebSocket connection** - results.jsx makes the WebSocket connection.
+- [x] **Data sent over WebSocket connection** - The name of the user is sent when a user submits their votes
+- [x] **WebSocket data displayed** - The message is displayed in results.jsx.
+- [x] **Application is fully functional** - ControversySolver is fully functional.
