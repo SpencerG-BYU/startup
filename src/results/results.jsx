@@ -45,6 +45,10 @@ export function Results({setUser}) {
                 // Display the message when a user votes
                 setMsg((prevMessages) => [...prevMessages, data.message]);            
             }
+            else if (data.type === 'userStartVote') {
+                // Display the message when a user starts voting again
+                setMsg((prevMessages) => [...prevMessages, data.message]);
+            }
         };
 
         ws.onclose = () => {
